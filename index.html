@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harshvardhan Pipariya — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1B1F;
+    --porcelain:#F2F1EB;
+    --white:#FFFFFF;
+    --indigo:#5B4FE8;
+    --mint:#00B39B;
+    --line: rgba(28,27,31,0.12);
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--porcelain); color:var(--ink); font-family:'Inter', sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  h1,h2,h3{font-family:'Sora', sans-serif; font-weight:700; line-height:1.08;}
+  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--indigo); display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{content:"§"; color:var(--mint);}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  /* NAV */
+  nav{ position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(242,241,235,0.88); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .logo{ font-family:var(--mono); font-weight:600; font-size:16px; }
+  .logo span{color:var(--mint);}
+  .nav-links{ display:flex; gap:32px; font-size:14px; font-weight:500; }
+  .nav-links a{ text-decoration:none; position:relative; padding:4px 0; }
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--indigo); transition:width .25s ease; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ font-family:var(--mono); font-size:12px; letter-spacing:.04em; background:var(--ink); color:var(--porcelain); padding:10px 18px; border-radius:2px; text-decoration:none; text-transform:uppercase; }
+  @media (max-width:900px){ .nav-links{display:none;} }
+
+  /* HERO */
+  .hero{ padding:150px 0 90px; }
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:56px; align-items:center; }
+  .hero h1{ font-size:clamp(36px, 4.6vw, 58px); margin-top:18px; letter-spacing:-0.01em; }
+  .hero h1 .accent{ color:var(--indigo); }
+  .hero p.lede{ font-size:17px; max-width:460px; margin-top:20px; opacity:.75; line-height:1.6; }
+  .hero-actions{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+  .btn-primary{ background:var(--indigo); color:var(--white); font-weight:600; padding:14px 24px; border-radius:3px; text-decoration:none; font-size:14.5px; transition:transform .2s ease, box-shadow .2s ease; display:inline-block; }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(91,79,232,0.28); }
+  .btn-ghost{ border:1px solid var(--ink); padding:13px 22px; border-radius:3px; text-decoration:none; font-size:14.5px; font-weight:600; }
+
+  /* signature: live stats console */
+  .console{ background:var(--ink); color:var(--porcelain); border-radius:8px; overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,0.18); }
+  .console-bar{ display:flex; align-items:center; gap:8px; padding:11px 14px; background:#141318; border-bottom:1px solid rgba(242,241,235,0.08); }
+  .dot{width:9px; height:9px; border-radius:50%;}
+  .dot.r{background:#E5615C;} .dot.y{background:#E5B85C;} .dot.g{background:#00B39B;}
+  .console-title{ margin-left:8px; font-family:var(--mono); font-size:11px; color:rgba(242,241,235,0.45); }
+  .console-body{ padding:26px 24px; display:flex; flex-direction:column; gap:18px; }
+  .stat-row{ display:flex; justify-content:space-between; align-items:baseline; font-family:var(--mono); }
+  .stat-label{ font-size:12px; color:rgba(242,241,235,0.55); text-transform:uppercase; letter-spacing:.05em; }
+  .stat-value{ font-size:26px; font-weight:600; color:var(--mint); }
+  .stat-value.alt{color:var(--indigo);} 
+  .console-divider{ height:1px; background:rgba(242,241,235,0.1); }
+
+  /* marquee */
+  .marquee-band{ background:var(--indigo); color:var(--white); border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); overflow:hidden; white-space:nowrap; padding:13px 0; }
+  .marquee-track{ display:inline-flex; animation:scroll-left 26s linear infinite; }
+  .marquee-track span{ font-family:var(--mono); font-size:13px; letter-spacing:.05em; text-transform:uppercase; padding:0 26px; display:flex; align-items:center; gap:26px; }
+  .marquee-track span::after{ content:"◆"; font-size:9px; opacity:.6; }
+  @keyframes scroll-left{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  section{ padding:104px 0; }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(28px,3.2vw,40px); margin-top:14px; }
+
+  /* experience timeline (real chronology, numbers justified) */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-row{ display:grid; grid-template-columns:150px 1fr; gap:28px; padding:32px 0; border-top:1px solid var(--line); }
+  .tl-row:last-child{ border-bottom:1px solid var(--line); }
+  .tl-date{ font-family:var(--mono); font-size:12.5px; color:var(--mint); padding-top:4px; }
+  .tl-content h3{ font-size:21px; }
+  .tl-content .tl-co{ font-family:var(--mono); font-size:12.5px; color:var(--indigo); margin-top:4px; }
+  .tl-content ul{ margin-top:14px; padding-left:18px; }
+  .tl-content li{ font-size:14.5px; line-height:1.65; opacity:.78; margin-bottom:6px; }
+  .stack-list{ display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+  .stack-pill{ font-family:var(--mono); font-size:10.5px; background:var(--white); border:1px solid var(--line); padding:3px 9px; border-radius:20px; }
+  @media (max-width:760px){ .tl-row{ grid-template-columns:1fr; gap:8px; } }
+
+  /* projects */
+  .projects-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:26px; }
+  .project-card{ background:var(--white); border:1px solid var(--line); overflow:hidden; transition:transform .25s ease; display:flex; flex-direction:column; }
+  .project-card:hover{ transform:translateY(-4px); }
+  .project-top{ height:120px; display:flex; align-items:center; padding:0 24px; font-family:'Sora', sans-serif; font-weight:700; font-size:20px; color:var(--white); }
+  .p-1{ background:linear-gradient(135deg,#5B4FE8,#1C1B1F); }
+  .p-2{ background:linear-gradient(135deg,#00B39B,#1C1B1F); }
+  .project-body{ padding:24px 24px 28px; flex:1; display:flex; flex-direction:column; }
+  .project-body p{ font-size:14px; line-height:1.6; opacity:.75; flex:1; }
+  .project-links{ display:flex; gap:16px; margin-top:16px; font-family:var(--mono); font-size:12px; }
+  .project-links a{ text-decoration:underline; text-underline-offset:3px; }
+  @media (max-width:820px){ .projects-grid{ grid-template-columns:1fr; } }
+
+  /* skills */
+  .skills-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .skill-col{ background:var(--porcelain); padding:28px 24px; }
+  .skill-col h3{ font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--indigo); font-weight:600; margin-bottom:14px; }
+  .skill-col ul{ list-style:none; }
+  .skill-col li{ font-size:14px; padding:5px 0; opacity:.82; }
+  @media (max-width:820px){ .skills-grid{ grid-template-columns:repeat(2,1fr); } }
+
+  /* achievements */
+  .achieve-wrap{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .achieve-card{ background:var(--ink); color:var(--porcelain); padding:30px 26px; border-radius:6px; }
+  .achieve-num{ font-family:'Sora', sans-serif; font-size:34px; font-weight:800; color:var(--mint); }
+  .achieve-card p{ font-size:13.5px; margin-top:10px; opacity:.72; line-height:1.55; }
+  @media (max-width:820px){ .achieve-wrap{ grid-template-columns:1fr; } }
+
+  /* education */
+  .edu-row{ display:grid; grid-template-columns:150px 1fr; gap:28px; padding:26px 0; border-top:1px solid var(--line); }
+  .edu-row:last-child{ border-bottom:1px solid var(--line); }
+  .edu-date{ font-family:var(--mono); font-size:12.5px; color:var(--mint); }
+  .edu-row h3{ font-size:19px; }
+  .edu-row .edu-sub{ font-size:13.5px; opacity:.65; margin-top:4px; }
+  @media (max-width:760px){ .edu-row{ grid-template-columns:1fr; gap:8px; } }
+
+  /* contact */
+  .contact{ background:var(--ink); color:var(--porcelain); }
+  .contact h2{ font-size:clamp(30px,5vw,52px); max-width:700px; color:var(--porcelain); }
+  .contact-row{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:26px; margin-top:34px; }
+  .contact-links{ display:flex; flex-direction:column; gap:10px; font-family:var(--mono); font-size:14px; }
+  .contact-links a{ text-decoration:underline; text-underline-offset:4px; }
+  .contact .btn-primary{ background:var(--mint); }
+
+  footer{ background:var(--ink); color:rgba(242,241,235,0.5); border-top:1px solid rgba(242,241,235,0.1); }
+  footer .wrap{ padding:28px 32px; display:flex; justify-content:space-between; font-family:var(--mono); font-size:12px; flex-wrap:wrap; gap:10px; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--indigo); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">harshvardhan<span>.</span>dev</div>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+    </div>
+    <a class="nav-cta" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Full-stack developer / MERN</div>
+      <h1>I build <span class="accent">real-time</span> web apps that stay fast under real data.</h1>
+      <p class="lede">Computer Science graduate and full-stack developer specializing in the MERN stack — from live data dashboards processing embedded device streams to real-time chat systems with sub-100ms delivery.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#projects">View projects</a>
+        <a class="btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="console reveal">
+      <div class="console-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="console-title">live_stats.log</div>
+      </div>
+      <div class="console-body">
+        <div class="stat-row"><span class="stat-label">Chat latency</span><span class="stat-value">&lt;100ms</span></div>
+        <div class="console-divider"></div>
+        <div class="stat-row"><span class="stat-label">LeetCode submissions (1yr)</span><span class="stat-value alt">850+</span></div>
+        <div class="console-divider"></div>
+        <div class="stat-row"><span class="stat-label">LeetCode streak</span><span class="stat-value">365 days</span></div>
+        <div class="console-divider"></div>
+        <div class="stat-row"><span class="stat-label">Query complexity cut</span><span class="stat-value alt">O(n) → O(1)</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span>React.js</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>MySQL</span><span>Socket.io</span><span>Tailwind CSS</span>
+    <span>React.js</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>MySQL</span><span>Socket.io</span><span>Tailwind CSS</span>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-row">
+        <div class="tl-date">Feb 2026 — May 2026<br>Bangalore, On-site</div>
+        <div class="tl-content">
+          <h3>Software Development Intern</h3>
+          <div class="tl-co">Velastra Pvt Ltd</div>
+          <ul>
+            <li>Built a real-time NTN data visualization platform displaying live data streamed from embedded devices.</li>
+            <li>Integrated interactive maps with Leaflet and responsive analytics dashboards with Apache ECharts.</li>
+            <li>Implemented XLSX report generation with a built-in preview for faster data review.</li>
+            <li>Cut database query execution complexity from O(n) to O(1), speeding up real-time data retrieval.</li>
+          </ul>
+          <div class="stack-list">
+            <span class="stack-pill">React.js</span><span class="stack-pill">Node.js</span><span class="stack-pill">MongoDB</span>
+            <span class="stack-pill">MySQL</span><span class="stack-pill">Leaflet</span><span class="stack-pill">ECharts</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-date">Dec 2024 — Jan 2025<br>Meerut, Remote</div>
+        <div class="tl-content">
+          <h3>Web Development Intern</h3>
+          <div class="tl-co">EazyByts</div>
+          <ul>
+            <li>Built a full-stack MERN e-commerce app with responsive, user-friendly UI components.</li>
+            <li>Implemented secure JWT authentication and authorization across login, signup, and protected routes.</li>
+            <li>Designed scalable REST APIs for products, cart, orders, and user accounts.</li>
+            <li>Added search, filtering, cart management, and checkout, with Redux for state management.</li>
+          </ul>
+          <div class="stack-list">
+            <span class="stack-pill">React.js</span><span class="stack-pill">Redux</span><span class="stack-pill">Node.js</span>
+            <span class="stack-pill">Express.js</span><span class="stack-pill">MongoDB</span><span class="stack-pill">JWT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Projects</div>
+      <h2>Things I've built</h2>
+    </div>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-top p-1">Edtech Platform</div>
+        <div class="project-body">
+          <p>A full-stack learning platform with authentication and authorization, Cloudinary media storage, Razorpay payments, and Nodemailer email verification and password reset.</p>
+          <div class="stack-list">
+            <span class="stack-pill">React.js</span><span class="stack-pill">Express.js</span><span class="stack-pill">Redux</span>
+            <span class="stack-pill">MongoDB</span><span class="stack-pill">JWT</span><span class="stack-pill">Razorpay</span>
+          </div>
+          <div class="project-links"><a href="#">GitHub →</a></div>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-top p-2">Real-Time Chat App</div>
+        <div class="project-body">
+          <p>A full-stack messaging platform with 1:1 chats, read receipts, typing indicators, online/offline status, and user blocking. Sub-100ms message delivery.</p>
+          <div class="stack-list">
+            <span class="stack-pill">Socket.IO</span><span class="stack-pill">React.js</span><span class="stack-pill">Node.js</span>
+            <span class="stack-pill">MongoDB</span><span class="stack-pill">JWT</span><span class="stack-pill">Cloudinary</span>
+          </div>
+          <div class="project-links"><a href="#">Frontend →</a><a href="#">Backend →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Skills</div>
+      <h2>What I work with</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-col">
+        <h3>Languages</h3>
+        <ul><li>JavaScript</li><li>C++</li><li>HTML</li><li>CSS</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Frontend</h3>
+        <ul><li>React.js</li><li>Redux</li><li>Tailwind CSS</li><li>Axios</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Backend</h3>
+        <ul><li>Node.js</li><li>Express.js</li><li>REST APIs</li><li>JWT Auth</li><li>Socket.io</li></ul>
+      </div>
+      <div class="skill-col">
+        <h3>Data &amp; Tools</h3>
+        <ul><li>MongoDB</li><li>MySQL</li><li>Mongoose</li><li>Git / GitHub</li><li>Linux · Vercel</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Achievements</div>
+      <h2>Beyond the day job</h2>
+    </div>
+    <div class="achieve-wrap reveal">
+      <div class="achieve-card">
+        <div class="achieve-num">365</div>
+        <p>Day streak badge on LeetCode — consistent, daily problem-solving practice.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">850+</div>
+        <p>LeetCode submissions in a single year (May 2026), across difficulty levels.</p>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">Rank 1</div>
+        <p>First place in the Supreme 3.0 Contest hosted by CodeHelp, July 2024.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Education</div>
+      <h2>Academic background</h2>
+    </div>
+    <div class="reveal">
+      <div class="edu-row">
+        <div class="edu-date">Nov 2020 — June 2024</div>
+        <div>
+          <h3>B.Tech, Computer Science and Engineering</h3>
+          <div class="edu-sub">Chhattrapati Shivaji Institute of Technology, Durg, India — 75.5%</div>
+          <div class="edu-sub">Coursework: Operating Systems, Data Structures, Analysis of Algorithms, AI, Machine Learning, Networking, Databases</div>
+        </div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-date">June 2020</div>
+        <div>
+          <h3>Higher Secondary Education</h3>
+          <div class="edu-sub">Govt Boys H.S. School, Balod, Chhattisgarh, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--mint);">Let's talk</div>
+    <h2>Open to full-stack roles and freelance projects.</h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a href="mailto:harshvardhanpipariya2@gmail.com">harshvardhanpipariya2@gmail.com</a>
+        <a href="tel:+919754011992">+91-9754011992</a>
+        <a href="https://linkedin.com/in/harshvardhanpipariya/" target="_blank" rel="noopener">linkedin.com/in/harshvardhanpipariya</a>
+        <a href="https://leetcode.com/harshvardhanpipariya12" target="_blank" rel="noopener">leetcode.com/harshvardhanpipariya12</a>
+      </div>
+      <a class="btn-primary" href="mailto:harshvardhanpipariya2@gmail.com">Send an email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Harshvardhan Pipariya</span>
+    <span>Built with React-grade attention to detail, in plain HTML.</span>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.12});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
